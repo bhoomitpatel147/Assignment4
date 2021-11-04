@@ -1,0 +1,59 @@
+@page "/counter"
+
+<h1>Counter</h1>
+
+<p>Current count: @currentCount</p>
+
+<p>Increment Amount: @IncrementAmount</p>
+
+<h4>Highest Score: @highestScore</h4>
+
+<br />
+
+<button class="btn btn-primary" @onclick="IncrementCount">Click me for Increment</button>
+
+<button class="btn btn-primary" @onclick="DecrementCount">Click me for Decrement</button>
+
+<button class="btn btn-primary" @onclick="ResetCount">Click me for Reset</button>
+
+<br /><br />
+
+
+@code {
+    private int currentCount = 0;
+    private int highestScore = 0;
+
+    [Parameter]
+    public int IncrementAmount { get; set; } = 1;
+
+    [Parameter]
+    public string InputValue { get; set; }
+    private void IncrementCount()
+    {
+        if (currentCount < 20)
+        {
+            currentCount += IncrementAmount;
+            highestScore = currentCount;
+        }
+    }
+    private void DecrementCount()
+    {
+        if (currentCount > 1)
+        {
+            currentCount -= IncrementAmount;
+        }
+    }
+    private void ResetCount()
+    {
+        currentCount = 0;
+    }
+}
+
+<label for="Name">Enter the name:
+    <input value="@InputValue" @onchange="@((ChangeEventArgs __e) => InputValue = __e.Value.ToString())" />
+    (Please enter to accept the Name:)
+</label>
+
+
+
+<p style="font-size: 2em;"><strong>@InputValue</strong></p>
