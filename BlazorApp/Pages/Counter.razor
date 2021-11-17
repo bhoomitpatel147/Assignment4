@@ -10,6 +10,8 @@
 
 <br />
 
+<button class="btn btn-primary" @onclick="IncreseCount">Click me</button>
+
 <button class="btn btn-primary" @onclick="IncrementCount">Click me for Increment</button>
 
 <button class="btn btn-primary" @onclick="DecrementCount">Click me for Decrement</button>
@@ -28,19 +30,27 @@
 
     [Parameter]
     public string InputValue { get; set; }
+
+    private void IncreseCount()
+    {
+        currentCount += IncrementAmount;
+        if (currentCount > highestScore)
+        {
+            highestScore = currentCount;
+        }
+    }
     private void IncrementCount()
     {
-        if (currentCount < 20)
+        if (IncrementAmount < 20)
         {
-            currentCount += IncrementAmount;
-            highestScore = currentCount;
+            IncrementAmount++;
         }
     }
     private void DecrementCount()
     {
-        if (currentCount > 1)
+        if (IncrementAmount > 1)
         {
-            currentCount -= IncrementAmount;
+            IncrementAmount--;
         }
     }
     private void ResetCount()
